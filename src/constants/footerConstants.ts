@@ -1,10 +1,6 @@
-export const OPERATING_MODE = {
-  weekday: {
-    openingTime: 1746676200000, // Пн-Пт открытие
-    closingTime: 1746737399000  // Пн-Пт закрытие
-  },
-  weekend: {
-    openingTime: 1746687000000, // Сб-Вс открытие
-    closingTime: 1746719999000  // Сб-Вс закрытие
-  }
-}
+const WEEKDAY_OPEN_HOURS = 9; // 9:00
+const WEEKDAY_CLOSE_HOURS = 18; // 18:00
+const WEEKEND_OPEN_HOURS = 10; // 10:00
+const WEEKEND_CLOSE_HOURS = 16; // 16:00
+
+export { WEEKDAY_OPEN_HOURS, WEEKDAY_CLOSE_HOURS, WEEKEND_OPEN_HOURS, WEEKEND_CLOSE_HOURS }

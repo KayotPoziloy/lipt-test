@@ -1,16 +1,14 @@
 import { Layout } from 'antd';
+import SiteTitle from './SiteTitle';
+import { headerStyle } from '../../styles/headerStyle.ts';
+import StockSearch from './StockSearch.tsx';
+import type { StockSearchProps } from './props.ts';
 
-const headerStyle: React.CSSProperties = {
-  textAlign: 'center',
-  color: '#fff',
-  height: '60px',
-  // paddingInline: 48,
-  // lineHeight: '64px',
-  backgroundColor: '#4096ff',
-};
-
-export default function HeaderComponent() {
+export default function HeaderComponent({ setSecuritieSearch }: StockSearchProps) {
   return(
-    <Layout.Header style={headerStyle}>Header</Layout.Header>
+    <Layout.Header style={headerStyle}>
+      <SiteTitle />
+      <StockSearch setSecuritieSearch={setSecuritieSearch}/>
+    </Layout.Header>
   )
 }

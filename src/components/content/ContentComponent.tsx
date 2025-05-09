@@ -1,15 +1,12 @@
 import { Layout } from 'antd';
+import { contentStyle } from '../../styles/contentComponentStyle';
+import type { SecuritieSearchProp  } from './props';
+import PriceChart from './PriceChart';
 
-const contentStyle: React.CSSProperties = {
-  margin: 0,
-  textAlign: 'center',
-  height: 'calc(100vh - 60px * 2)',
-  color: '#fff',
-  backgroundColor: '#0958d9',
-};
-
-export default function ContentComponent() {
+export default function ContentComponent({ securitieSearch }: SecuritieSearchProp) {
   return(
-    <Layout.Content style={contentStyle}>Content</Layout.Content>
+    <Layout.Content style={contentStyle}>
+      <PriceChart securitieSearch={securitieSearch}/>
+    </Layout.Content>
   )
 }
