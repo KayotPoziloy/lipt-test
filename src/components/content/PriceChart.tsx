@@ -1,70 +1,39 @@
-import { useEffect, useRef } from 'react';
-import { createChart, LineSeries  } from 'lightweight-charts';
 import { priceChartStyle } from '../../styles/priceChartStyle';
-import type { IChartApi, LineData } from 'lightweight-charts';
 import type { SecuritieSearchProp  } from './props';
+import usePriceChart from '../../scripts/hooks/usePriceChart';
+import { useEffect } from 'react';
+import { getSecuritiePrices } from '../../scripts/backend/securitiePriceApi';
 
 export default function PriceChart({ securitieSearch }: SecuritieSearchProp) {
-  const chartContainerRef = useRef<HTMLDivElement>(null);
-  const chartRef = useRef<IChartApi | null>(null);
+  const { chartContainerRef, updateData } = usePriceChart([
+      { value: 0, time: 1642425322 }, 
+      { value: 8, time: 1642511722 }, 
+      { value: 10, time: 1642598122 }, 
+      { value: 20, time: 1642684522 }, 
+      { value: 3, time: 1642770922 }, 
+      { value: 43, time: 1642857322 }, 
+      { value: 41, time: 1642943722 }, 
+      { value: 43, time: 1643030122 }, 
+      { value: 56, time: 1643116522 }, 
+      { value: 46, time: 1643202922 }
+  ]);
 
   useEffect(() => {
-    const container = chartContainerRef.current;
-    if (!container) return;
+    async function loadData() {
+      try {
+        if (securitieSearch) {
+          const data = await getSecuritiePrices(securitieSearch);
+          updateData(data)
+        }
+      } catch (error) {
+        console.error('Failed to load chart data:', error);
+      }
+    }
 
-    // Создаём график
-    const chart = createChart(container, {
-      width: container.clientWidth,
-      // height: 200,
-      layout: {
-        background: { color: '#ffffff' },
-        textColor: '#000000',
-      },
-      grid: {
-        vertLines: { color: '#eee' },
-        horzLines: { color: '#eee' },
-      },
-      timeScale: {
-        timeVisible: true,
-      },
-    });
-
-    // Сохраняем ссылку
-    chartRef.current = chart;
-
-    const lineSeries = chart.addSeries(LineSeries, {
-       color: 'red', 
-       lineWidth: 2, 
-    });
-
-
-    // Мок-данные для теста
-    const mockData: LineData[] = [
-      { time: '2024-05-01', value: 301.95 },
-      { time: '2024-05-02', value: 108 },
-      { time: '2024-05-03', value: 102 },
-      { time: '2024-05-04', value: 110 },
-      { time: '2024-05-05', value: 112 },
-    ];
-
-    lineSeries.setData(mockData);
-
-    const handleResize = () => {
-      chart.applyOptions({ width: chartContainerRef.current!.clientWidth });
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      chart.remove();
-    };
+    loadData();
   }, [securitieSearch]);
 
   return (
-    <div>
-      <h2>{securitieSearch}</h2>
-      <div ref={chartContainerRef} style={ priceChartStyle } />
-    </div>
+    <div ref={chartContainerRef} style={ priceChartStyle } />
   );
 }
