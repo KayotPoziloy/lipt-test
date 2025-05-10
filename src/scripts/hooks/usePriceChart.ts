@@ -1,6 +1,7 @@
 import { createChart, LineSeries  } from 'lightweight-charts';
 import type { IChartApi, ISeriesApi, LineData } from 'lightweight-charts';
 import { useRef, useEffect } from 'react';
+import { getSecuritiePrices } from '../api/securitiePriceApi';
 
 export default function usePriceChart(initialData: LineData[] = []) {
   const chartContainerRef = useRef<HTMLDivElement>(null);
@@ -25,10 +26,10 @@ export default function usePriceChart(initialData: LineData[] = []) {
         timeVisible: true,
         secondsVisible: true,
       },
+      autoSize: true,
     }
 
     const chart = createChart(container, chartOprions);
-
     chartRef.current = chart;
 
     const lineSeries = chart.addSeries(LineSeries, {
@@ -51,11 +52,16 @@ export default function usePriceChart(initialData: LineData[] = []) {
     };
   }, []);
 
-  const updateData = (data: LineData[]) => {
-    if (seriesRef.current) {
-      seriesRef.current.setData(data);
+  const loadChartData = async (ticker: string) => {
+    try {
+      const data = await getSecuritiePrices(ticker);
+      if (seriesRef.current) {
+        seriesRef.current.setData(data);
+      }
+    } catch (error) {
+      console.error('Failed to load chart data:', error);
     }
   }
 
-  return { chartContainerRef, updateData};
+  return { chartContainerRef, loadChartData};
 }

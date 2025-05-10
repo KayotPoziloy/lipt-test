@@ -1,7 +1,8 @@
 export const priceChartStyle: React.CSSProperties = {
   color: 'black',
-  width: '50%',
-  height: '400px',
+  width: '100%',
+  flex: '1 1 auto',
+  minHeight: 0,
   margin: '0 auto',
 }
 

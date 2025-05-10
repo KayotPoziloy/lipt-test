@@ -1,5 +1,7 @@
 export const contentStyle: React.CSSProperties = {
-  height: 'calc(100vh - 100px - 60px)',
+  height: 'calc(100vh - 120px)',
   color: '#fff',
   backgroundColor: '#FFFFFFFF',
+  display: 'flex',
+  flexDirection: 'column', 
 };

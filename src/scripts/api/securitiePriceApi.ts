@@ -35,9 +35,9 @@ export async function getSecuritiePrices(ticker: string): Promise<ChartPoint[]> 
       throw new Error("Некорректный формат данных от API");
     }
     
-    return chartData.map((candle: { open_time: number; value: number }) => ({
-      value: candle.value,
-      time: Math.floor(candle.open_time / 1000),
+    return chartData.map((point: { open_time: number; value: number }) => ({
+      value: point.value,
+      time: Math.floor(point.open_time / 1000),
     }));
   } catch (error) {
     console.error("getSecuritiePrices failed:", error);

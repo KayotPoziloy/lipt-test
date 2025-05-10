@@ -1,5 +1,7 @@
+import { siteTitleSyte } from "../../styles/siteTitleStyle";
+
 export default function SiteTitle() {
   return (
-    <div>Московская биржа</div>
+    <h1 style={siteTitleSyte}>Московская биржа</h1>
   )
 }
