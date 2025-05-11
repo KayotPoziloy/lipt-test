@@ -3,5 +3,5 @@ export const contentStyle: React.CSSProperties = {
   color: '#fff',
   backgroundColor: '#FFFFFFFF',
   display: 'flex',
-  flexDirection: 'column', 
-};
+  flexDirection: 'column',
+}

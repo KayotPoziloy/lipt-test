@@ -1,14 +1,14 @@
-import { Layout } from 'antd';
-import SiteTitle from './SiteTitle';
-import { headerStyle } from '../../styles/headerStyle.ts';
-import StockSearch from './StockSearch.tsx';
-import type { StockSearchProps } from './props.ts';
+import { Layout } from 'antd'
+import SiteTitle from './SiteTitle'
+import { headerStyle } from '../../styles/headerStyle.ts'
+import StockSearch from './StockSearch.tsx'
+import type { StockSearchProps } from '../../types/stock.ts'
 
 export default function HeaderComponent({ setSecuritieSearch }: StockSearchProps) {
-  return(
+  return (
     <Layout.Header style={headerStyle}>
       <SiteTitle />
-      <StockSearch setSecuritieSearch={setSecuritieSearch}/>
+      <StockSearch setSecuritieSearch={setSecuritieSearch} />
     </Layout.Header>
   )
 }

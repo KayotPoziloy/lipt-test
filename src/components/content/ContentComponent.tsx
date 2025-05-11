@@ -1,12 +1,12 @@
-import { Layout } from 'antd';
-import { contentStyle } from '../../styles/contentComponentStyle';
-import type { SecuritieSearchProp  } from './props';
-import PriceChart from './PriceChart';
+import { Layout } from 'antd'
+import { contentStyle } from '../../styles/contentComponentStyle'
+import PriceChart from './PriceChart'
+import type { SecuritieSearchState } from '../../types'
 
-export default function ContentComponent({ securitieSearch }: SecuritieSearchProp) {
-  return(
+export default function ContentComponent({ securitieSearch }: SecuritieSearchState) {
+  return (
     <Layout.Content style={contentStyle}>
-      <PriceChart securitieSearch={securitieSearch}/>
+      <PriceChart securitieSearch={securitieSearch} />
     </Layout.Content>
   )
 }

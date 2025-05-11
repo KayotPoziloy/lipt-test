@@ -5,4 +5,3 @@ export const priceChartStyle: React.CSSProperties = {
   minHeight: 0,
   margin: '0 auto',
 }
-
